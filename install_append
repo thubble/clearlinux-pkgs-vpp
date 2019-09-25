@@ -1,0 +1,4 @@
+mkdir %{buildroot}/usr/lib/sysctl.d
+mv %{buildroot}/usr/etc/sysctl.d/80-vpp.conf %{buildroot}/usr/lib/sysctl.d/
+mkdir -p %{buildroot}/usr/share/doc/vpp
+mv %{buildroot}/usr/etc/vpp/startup.conf %{buildroot}/usr/share/doc/vpp/

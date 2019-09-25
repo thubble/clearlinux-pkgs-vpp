@@ -1,0 +1,13 @@
+This function calls return() which abrubtly aborts the search for DPDK_SHLIB. :(
+
+--- vpp-19.08.1/src/plugins/dpdk/CMakeLists.txt~	2019-09-24 17:23:41.621176212 -0700
++++ vpp-19.08.1/src/plugins/dpdk/CMakeLists.txt	2019-09-24 17:21:51.349177264 -0700
+@@ -15,7 +15,7 @@
+ # Find lib and include files
+ ##############################################################################
+ find_path(DPDK_INCLUDE_DIR PATH_SUFFIXES dpdk NAMES rte_config.h)
+-vpp_plugin_find_library(dpdk DPDK_LIB "libdpdk.a")
++##vpp_plugin_find_library(dpdk DPDK_LIB "libdpdk.a")
+ 
+ if (NOT DPDK_INCLUDE_DIR)
+   message(WARNING "-- DPDK headers not found - dpdk plugin disabled")

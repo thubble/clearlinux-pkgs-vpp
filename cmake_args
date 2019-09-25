@@ -1,0 +1,1 @@
+-DDPDK_INCLUDE_DIR=/usr/include/dpdk -DDPDK_SHLIB=/usr/lib64
