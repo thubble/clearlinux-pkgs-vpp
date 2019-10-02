@@ -4,5 +4,5 @@ for f in vapi_c_gen.py vapi_cpp_gen.py vapi_json_parser.py; do \
 	2to3-3.7 -w src/vpp-api/vapi/$f; \
 done
 for n in `find . -name cmake_install.cmake`; do \
-	sed -i 's|\("${CMAKE_INSTALL_PREFIX}/\)lib"|\1${CMAKE_INSTALL_LIBDIR}|' $n; \
+	sed -i 's|\(${CMAKE_INSTALL_PREFIX}/\)lib|\1${CMAKE_INSTALL_LIBDIR}|' $n; \
 done
