@@ -1,1 +1,1 @@
--DDPDK_INCLUDE_DIR=/usr/include/dpdk -DDPDK_SHLIB=/usr/lib64
+-DDPDK_INCLUDE_DIR=/usr/include/dpdk -DDPDK_SHLIB=/usr/lib64 -DCMAKE_INSTALL_LIBDIR=lib64
