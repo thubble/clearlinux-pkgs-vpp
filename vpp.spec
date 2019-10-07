@@ -4,14 +4,13 @@
 #
 Name     : vpp
 Version  : 19.08.1
-Release  : 5
+Release  : 6
 URL      : https://github.com/FDio/vpp/archive/v19.08.1.tar.gz
 Source0  : https://github.com/FDio/vpp/archive/v19.08.1.tar.gz
 Summary  : Vector Packet Processing
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: vpp-bin = %{version}-%{release}
-Requires: vpp-config = %{version}-%{release}
 Requires: vpp-data = %{version}-%{release}
 Requires: vpp-lib = %{version}-%{release}
 Requires: vpp-license = %{version}-%{release}
@@ -46,19 +45,10 @@ vpp_json_test - vector packet engine JSON test tool
 Summary: bin components for the vpp package.
 Group: Binaries
 Requires: vpp-data = %{version}-%{release}
-Requires: vpp-config = %{version}-%{release}
 Requires: vpp-license = %{version}-%{release}
 
 %description bin
 bin components for the vpp package.
-
-
-%package config
-Summary: config components for the vpp package.
-Group: Default
-
-%description config
-config components for the vpp package.
 
 
 %package data
@@ -133,7 +123,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1570051618
+export SOURCE_DATE_EPOCH=1570482509
 pushd src
 mkdir -p clr-build
 pushd clr-build
@@ -151,7 +141,7 @@ popd
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1570051618
+export SOURCE_DATE_EPOCH=1570482509
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/vpp
 cp LICENSE %{buildroot}/usr/share/package-licenses/vpp/LICENSE
@@ -164,10 +154,9 @@ pushd clr-build
 popd
 popd
 ## install_append content
-mkdir %{buildroot}/usr/lib/sysctl.d
-mv %{buildroot}/usr/etc/sysctl.d/80-vpp.conf %{buildroot}/usr/lib/sysctl.d/
 mkdir -p %{buildroot}/usr/share/doc/vpp
 mv %{buildroot}/usr/etc/vpp/startup.conf %{buildroot}/usr/share/doc/vpp/
+mv %{buildroot}/usr/etc/sysctl.d/80-vpp.conf %{buildroot}/usr/share/doc/vpp/sysctl.d-example-80-vpp.conf
 ## install_append end
 
 %files
@@ -186,10 +175,6 @@ mv %{buildroot}/usr/etc/vpp/startup.conf %{buildroot}/usr/share/doc/vpp/
 /usr/bin/vpp_restart
 /usr/bin/vppapigen
 /usr/bin/vppctl
-
-%files config
-%defattr(-,root,root,-)
-/usr/lib/sysctl.d/80-vpp.conf
 
 %files data
 %defattr(-,root,root,-)
