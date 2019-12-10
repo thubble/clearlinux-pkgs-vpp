@@ -4,7 +4,7 @@
 #
 Name     : vpp
 Version  : 19.08.1
-Release  : 7
+Release  : 8
 URL      : https://github.com/FDio/vpp/archive/v19.08.1.tar.gz
 Source0  : https://github.com/FDio/vpp/archive/v19.08.1.tar.gz
 Summary  : Vector Packet Processing
@@ -108,6 +108,7 @@ plugins components for the vpp package.
 
 %prep
 %setup -q -n vpp-19.08.1
+cd %{_builddir}/vpp-19.08.1
 %patch1 -p1
 %patch2 -p1
 
@@ -116,14 +117,14 @@ plugins components for the vpp package.
 sed -i 's|${VPP_VERSION}|%{version}|' src/CMakeLists.txt
 for f in vapi_c_gen.py vapi_cpp_gen.py vapi_json_parser.py; do \
 sed -i 's|python2|python|' src/vpp-api/vapi/$f; \
-2to3-3.7 -w src/vpp-api/vapi/$f; \
+2to3-3.8 -w src/vpp-api/vapi/$f; \
 done
 ## build_prepend end
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1570482509
+export SOURCE_DATE_EPOCH=1576003342
 pushd src
 mkdir -p clr-build
 pushd clr-build
@@ -141,13 +142,13 @@ popd
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1570482509
+export SOURCE_DATE_EPOCH=1576003342
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/vpp
-cp LICENSE %{buildroot}/usr/share/package-licenses/vpp/LICENSE
-cp extras/vpp_config/LICENSE.txt %{buildroot}/usr/share/package-licenses/vpp/extras_vpp_config_LICENSE.txt
-cp src/pkg/debian/copyright %{buildroot}/usr/share/package-licenses/vpp/src_pkg_debian_copyright
-cp src/vpp-api/python/LICENSE.txt %{buildroot}/usr/share/package-licenses/vpp/src_vpp-api_python_LICENSE.txt
+cp %{_builddir}/vpp-19.08.1/LICENSE %{buildroot}/usr/share/package-licenses/vpp/1128f8f91104ba9ef98d37eea6523a888dcfa5de
+cp %{_builddir}/vpp-19.08.1/extras/vpp_config/LICENSE.txt %{buildroot}/usr/share/package-licenses/vpp/669a1e53b9dd9df3474300d3d959bb85bad75945
+cp %{_builddir}/vpp-19.08.1/src/pkg/debian/copyright %{buildroot}/usr/share/package-licenses/vpp/ce6f4e9522a351c40cd0400eb7823207731f4421
+cp %{_builddir}/vpp-19.08.1/src/vpp-api/python/LICENSE.txt %{buildroot}/usr/share/package-licenses/vpp/669a1e53b9dd9df3474300d3d959bb85bad75945
 pushd src
 pushd clr-build
 %make_install
@@ -1198,10 +1199,9 @@ mv %{buildroot}/usr/etc/sysctl.d/80-vpp.conf %{buildroot}/usr/share/doc/vpp/sysc
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/vpp/LICENSE
-/usr/share/package-licenses/vpp/extras_vpp_config_LICENSE.txt
-/usr/share/package-licenses/vpp/src_pkg_debian_copyright
-/usr/share/package-licenses/vpp/src_vpp-api_python_LICENSE.txt
+/usr/share/package-licenses/vpp/1128f8f91104ba9ef98d37eea6523a888dcfa5de
+/usr/share/package-licenses/vpp/669a1e53b9dd9df3474300d3d959bb85bad75945
+/usr/share/package-licenses/vpp/ce6f4e9522a351c40cd0400eb7823207731f4421
 
 %files plugins
 %defattr(-,root,root,-)
