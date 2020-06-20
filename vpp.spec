@@ -4,7 +4,7 @@
 #
 Name     : vpp
 Version  : 19.08.1
-Release  : 10
+Release  : 11
 URL      : https://github.com/FDio/vpp/archive/v19.08.1.tar.gz
 Source0  : https://github.com/FDio/vpp/archive/v19.08.1.tar.gz
 Summary  : Vector Packet Processing
@@ -124,7 +124,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1576003342
+export SOURCE_DATE_EPOCH=1592662803
 pushd src
 mkdir -p clr-build
 pushd clr-build
@@ -133,16 +133,16 @@ export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake .. -DDPDK_INCLUDE_DIR=/usr/include/dpdk -DDPDK_SHLIB=/usr/lib64 -DCMAKE_INSTALL_LIBDIR=lib64
-make  %{?_smp_mflags}  VERBOSE=1
+make  %{?_smp_mflags}
 popd
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1576003342
+export SOURCE_DATE_EPOCH=1592662803
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/vpp
 cp %{_builddir}/vpp-19.08.1/LICENSE %{buildroot}/usr/share/package-licenses/vpp/1128f8f91104ba9ef98d37eea6523a888dcfa5de
