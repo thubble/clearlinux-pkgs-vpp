@@ -4,7 +4,7 @@
 #
 Name     : vpp
 Version  : 19.08.1
-Release  : 12
+Release  : 13
 URL      : https://github.com/FDio/vpp/archive/v19.08.1.tar.gz
 Source0  : https://github.com/FDio/vpp/archive/v19.08.1.tar.gz
 Summary  : Vector Packet Processing
