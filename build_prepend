@@ -1,5 +1,5 @@
 sed -i 's|${VPP_VERSION}|%{version}|' src/CMakeLists.txt
 for f in vapi_c_gen.py vapi_cpp_gen.py vapi_json_parser.py; do \
 	sed -i 's|python2|python|' src/vpp-api/vapi/$f; \
-	2to3-3.8 -w src/vpp-api/vapi/$f; \
+	2to3-3.9 -w src/vpp-api/vapi/$f; \
 done

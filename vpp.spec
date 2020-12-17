@@ -4,7 +4,7 @@
 #
 Name     : vpp
 Version  : 19.08.1
-Release  : 14
+Release  : 15
 URL      : https://github.com/FDio/vpp/archive/v19.08.1.tar.gz
 Source0  : https://github.com/FDio/vpp/archive/v19.08.1.tar.gz
 Summary  : Vector Packet Processing
@@ -117,14 +117,14 @@ cd %{_builddir}/vpp-19.08.1
 sed -i 's|${VPP_VERSION}|%{version}|' src/CMakeLists.txt
 for f in vapi_c_gen.py vapi_cpp_gen.py vapi_json_parser.py; do \
 sed -i 's|python2|python|' src/vpp-api/vapi/$f; \
-2to3-3.8 -w src/vpp-api/vapi/$f; \
+2to3-3.9 -w src/vpp-api/vapi/$f; \
 done
 ## build_prepend end
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1592662803
+export SOURCE_DATE_EPOCH=1608170896
 pushd src
 mkdir -p clr-build
 pushd clr-build
@@ -142,7 +142,7 @@ popd
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1592662803
+export SOURCE_DATE_EPOCH=1608170896
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/vpp
 cp %{_builddir}/vpp-19.08.1/LICENSE %{buildroot}/usr/share/package-licenses/vpp/1128f8f91104ba9ef98d37eea6523a888dcfa5de
