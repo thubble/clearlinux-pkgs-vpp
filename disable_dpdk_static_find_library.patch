@@ -1,7 +1,9 @@
 This function calls return() which abrubtly aborts the search for DPDK_SHLIB. :(
 
---- vpp-19.08.1/src/plugins/dpdk/CMakeLists.txt~	2019-09-24 17:23:41.621176212 -0700
-+++ vpp-19.08.1/src/plugins/dpdk/CMakeLists.txt	2019-09-24 17:21:51.349177264 -0700
+diff --git a/src/plugins/dpdk/CMakeLists.txt b/src/plugins/dpdk/CMakeLists.txt
+index 1dd7507..0d3102a 100644
+--- a/src/plugins/dpdk/CMakeLists.txt
++++ b/src/plugins/dpdk/CMakeLists.txt
 @@ -15,7 +15,7 @@
  # Find lib and include files
  ##############################################################################

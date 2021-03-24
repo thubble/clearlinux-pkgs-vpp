@@ -1,0 +1,15 @@
+diff --git a/src/pkg/CMakeLists.txt b/src/pkg/CMakeLists.txt
+index d5cc207..29491ce 100644
+--- a/src/pkg/CMakeLists.txt
++++ b/src/pkg/CMakeLists.txt
+@@ -24,8 +24,8 @@ execute_process(
+   OUTPUT_STRIP_TRAILING_WHITESPACE
+ )
+ 
+-# parse /etc/os-release
+-file(READ "/etc/os-release" os_release)
++# parse /usr/lib/os-release
++file(READ "/usr/lib/os-release" os_release)
+ string(REPLACE "\n" ";" os_release ${os_release})
+ foreach(l ${os_release})
+   string(REPLACE "=" ";" l ${l})
