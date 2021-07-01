@@ -1,5 +1,5 @@
 diff --git a/src/pkg/CMakeLists.txt b/src/pkg/CMakeLists.txt
-index d5cc207..29491ce 100644
+index d447774..971541c 100644
 --- a/src/pkg/CMakeLists.txt
 +++ b/src/pkg/CMakeLists.txt
 @@ -24,8 +24,8 @@ execute_process(

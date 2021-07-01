@@ -1,15 +1,15 @@
 This function calls return() which abrubtly aborts the search for DPDK_SHLIB. :(
 
 diff --git a/src/plugins/dpdk/CMakeLists.txt b/src/plugins/dpdk/CMakeLists.txt
-index 1dd7507..0d3102a 100644
+index 386515e..e6b7ce4 100644
 --- a/src/plugins/dpdk/CMakeLists.txt
 +++ b/src/plugins/dpdk/CMakeLists.txt
-@@ -15,7 +15,7 @@
- # Find lib and include files
- ##############################################################################
- find_path(DPDK_INCLUDE_DIR PATH_SUFFIXES dpdk NAMES rte_config.h)
--vpp_plugin_find_library(dpdk DPDK_LIB "libdpdk.a")
-+##vpp_plugin_find_library(dpdk DPDK_LIB "libdpdk.a")
+@@ -26,7 +26,7 @@ else()
+     # Find lib and include files
+     ##############################################################################
+     vpp_find_path(DPDK_INCLUDE_DIR PATH_SUFFIXES dpdk NAMES rte_config.h)
+-    vpp_plugin_find_library(dpdk DPDK_LIB "libdpdk.a")
++    ##vpp_plugin_find_library(dpdk DPDK_LIB "libdpdk.a")
  
- if (NOT DPDK_INCLUDE_DIR)
-   message(WARNING "-- DPDK headers not found - dpdk plugin disabled")
+     if (NOT DPDK_INCLUDE_DIR)
+       message(WARNING "-- DPDK headers not found - dpdk plugin disabled")
