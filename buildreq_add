@@ -1,6 +1,6 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
-ply
+pypi(ply)
 python3
 dpdk-dev
 numactl-dev

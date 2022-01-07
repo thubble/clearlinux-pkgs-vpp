@@ -4,7 +4,7 @@
 #
 Name     : vpp
 Version  : 21.06
-Release  : 17
+Release  : 18
 URL      : https://github.com/FDio/vpp/archive/v21.06/vpp-21.06.tar.gz
 Source0  : https://github.com/FDio/vpp/archive/v21.06/vpp-21.06.tar.gz
 Summary  : Vector Packet Processing
@@ -14,35 +14,26 @@ Requires: vpp-bin = %{version}-%{release}
 Requires: vpp-data = %{version}-%{release}
 Requires: vpp-lib = %{version}-%{release}
 Requires: vpp-license = %{version}-%{release}
-Requires: Jinja2
-Requires: PyYAML
-Requires: certifi
-Requires: chardet
-Requires: distro
-Requires: idna
-Requires: requests
-Requires: urllib3
-BuildRequires : Jinja2
-BuildRequires : PyYAML
 BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-distutils3
-BuildRequires : certifi
-BuildRequires : chardet
-BuildRequires : distro
 BuildRequires : dpdk-dev
 BuildRequires : glibc-dev
 BuildRequires : gtk+-dev
-BuildRequires : idna
 BuildRequires : numactl-dev
 BuildRequires : openssl-dev
 BuildRequires : pkg-config
 BuildRequires : pkgconfig(libdpdk)
-BuildRequires : ply
+BuildRequires : pypi(certifi)
+BuildRequires : pypi(chardet)
+BuildRequires : pypi(distro)
+BuildRequires : pypi(idna)
+BuildRequires : pypi(ply)
+BuildRequires : pypi(pyyaml)
+BuildRequires : pypi(requests)
+BuildRequires : pypi(urllib3)
 BuildRequires : python3
 BuildRequires : python3-dev
-BuildRequires : requests
-BuildRequires : urllib3
 Patch1: disable_dpdk_static_find_library.patch
 Patch2: fix_libdir_install_location.patch
 Patch3: os-release.patch
@@ -125,7 +116,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1625166471
+export SOURCE_DATE_EPOCH=1641552372
 pushd src
 mkdir -p clr-build
 pushd clr-build
@@ -133,10 +124,10 @@ export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %cmake .. -DDPDK_INCLUDE_DIR=/usr/include/dpdk \
 -DDPDK_SHLIB=/usr/lib64 \
 -DCMAKE_INSTALL_LIBDIR=lib64 \
@@ -146,7 +137,7 @@ popd
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1625166471
+export SOURCE_DATE_EPOCH=1641552372
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/vpp
 cp %{_builddir}/vpp-21.06/LICENSE %{buildroot}/usr/share/package-licenses/vpp/1128f8f91104ba9ef98d37eea6523a888dcfa5de
