@@ -4,3 +4,7 @@ pypi(ply)
 python3
 dpdk-dev
 numactl-dev
+libnl-dev
+rdma-core-dev
+rdma-core-staticdev
+libmnl-dev
