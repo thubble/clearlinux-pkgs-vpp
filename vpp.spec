@@ -4,7 +4,7 @@
 #
 Name     : vpp
 Version  : 21.10.1
-Release  : 19
+Release  : 20
 URL      : https://github.com/FDio/vpp/archive/v21.10.1/vpp-21.10.1.tar.gz
 Source0  : https://github.com/FDio/vpp/archive/v21.10.1/vpp-21.10.1.tar.gz
 Summary  : Vector Packet Processing
@@ -37,7 +37,6 @@ BuildRequires : pypi(urllib3)
 BuildRequires : python3
 BuildRequires : python3-dev
 BuildRequires : rdma-core-dev
-BuildRequires : rdma-core-staticdev
 Patch1: disable_dpdk_static_find_library.patch
 Patch2: fix_libdir_install_location.patch
 Patch3: os-release.patch
@@ -120,7 +119,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1645498549
+export SOURCE_DATE_EPOCH=1645728799
 pushd src
 mkdir -p clr-build
 pushd clr-build
@@ -142,7 +141,7 @@ popd
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1645498549
+export SOURCE_DATE_EPOCH=1645728799
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/vpp
 cp %{_builddir}/vpp-21.10.1/LICENSE %{buildroot}/usr/share/package-licenses/vpp/1128f8f91104ba9ef98d37eea6523a888dcfa5de
