@@ -4,5 +4,11 @@ libcrypto.so.1.1
 libm.so.6
 libnl-3.so.200
 libnl-route-3.so.200
+librte_cryptodev.so.22
+librte_eal.so.22
+librte_ethdev.so.22
+librte_mbuf.so.22
+librte_mempool.so.22
+librte_ring.so.22
 libssl.so.1.1
 libuuid.so.1
