@@ -4,7 +4,7 @@
 #
 Name     : vpp
 Version  : 22.02
-Release  : 21
+Release  : 23
 URL      : https://github.com/FDio/vpp/archive/v22.02/vpp-22.02.tar.gz
 Source0  : https://github.com/FDio/vpp/archive/v22.02/vpp-22.02.tar.gz
 Summary  : Vector Packet Processing
@@ -38,7 +38,8 @@ BuildRequires : pypi(urllib3)
 BuildRequires : python3
 BuildRequires : python3-dev
 BuildRequires : rdma-core-dev
-Patch1: os-release.patch
+Patch1: vpp-stable-branch.patch
+Patch2: os-release.patch
 
 %description
 This package provides VPP executables: vpp, vpp_api_test, vpp_json_test
@@ -122,6 +123,7 @@ python3 components for the vpp package.
 %setup -q -n vpp-22.02
 cd %{_builddir}/vpp-22.02
 %patch1 -p1
+%patch2 -p1
 
 %build
 ## build_prepend content
@@ -131,7 +133,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656194632
+export SOURCE_DATE_EPOCH=1656271428
 pushd src
 mkdir -p clr-build
 pushd clr-build
@@ -141,19 +143,15 @@ export FCFLAGS="$FFLAGS -fno-lto "
 export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 %cmake .. -DCMAKE_BUILD_TYPE="release" \
--DDPDK_INCLUDE_DIR=/usr/include/dpdk \
--DDPDK_SHLIB=/usr/lib64 \
 -DCMAKE_INSTALL_LIBDIR=lib64 \
 -DVPP_LIBRARY_DIR=lib64 \
--DVPP_USE_SYSTEM_DPDK=ON \
--DDPDK_RTE_IBVERBS_LINK_DLOPEN=true \
--DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
+-DVPP_USE_SYSTEM_DPDK=ON
 make
 popd
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1656194632
+export SOURCE_DATE_EPOCH=1656271428
 rm -rf %{buildroot}
 pushd src
 pushd clr-build
@@ -820,6 +818,7 @@ mv %{buildroot}/usr/etc/sysctl.d/80-vpp.conf %{buildroot}/usr/share/doc/vpp/sysc
 /usr/include/vnet/fib/fib_api.h
 /usr/include/vnet/fib/fib_entry.h
 /usr/include/vnet/fib/fib_entry_delegate.h
+/usr/include/vnet/fib/fib_entry_track.h
 /usr/include/vnet/fib/fib_node.h
 /usr/include/vnet/fib/fib_node_list.h
 /usr/include/vnet/fib/fib_sas.h
@@ -1185,6 +1184,7 @@ mv %{buildroot}/usr/etc/sysctl.d/80-vpp.conf %{buildroot}/usr/share/doc/vpp/sysc
 /usr/include/vnet/udp/udp.api_tojson.h
 /usr/include/vnet/udp/udp.api_types.h
 /usr/include/vnet/udp/udp.h
+/usr/include/vnet/udp/udp_encap.h
 /usr/include/vnet/udp/udp_error.def
 /usr/include/vnet/udp/udp_inlines.h
 /usr/include/vnet/udp/udp_local.h

@@ -1,3 +1,2 @@
-#disable_dpdk_static_find_library.patch
-#fix_libdir_install_location.patch
+vpp-stable-branch.patch
 os-release.patch
