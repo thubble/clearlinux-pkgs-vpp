@@ -4,7 +4,7 @@
 #
 Name     : vpp
 Version  : 22.02
-Release  : 23
+Release  : 24
 URL      : https://github.com/FDio/vpp/archive/v22.02/vpp-22.02.tar.gz
 Source0  : https://github.com/FDio/vpp/archive/v22.02/vpp-22.02.tar.gz
 Summary  : Vector Packet Processing
@@ -13,6 +13,7 @@ License  : Apache-2.0
 Requires: vpp-bin = %{version}-%{release}
 Requires: vpp-data = %{version}-%{release}
 Requires: vpp-lib = %{version}-%{release}
+Requires: vpp-license = %{version}-%{release}
 Requires: vpp-python = %{version}-%{release}
 Requires: vpp-python3 = %{version}-%{release}
 BuildRequires : boost-dev
@@ -51,6 +52,7 @@ vpp_json_test - vector packet engine JSON test tool
 Summary: bin components for the vpp package.
 Group: Binaries
 Requires: vpp-data = %{version}-%{release}
+Requires: vpp-license = %{version}-%{release}
 
 %description bin
 bin components for the vpp package.
@@ -89,9 +91,18 @@ doc components for the vpp package.
 Summary: lib components for the vpp package.
 Group: Libraries
 Requires: vpp-data = %{version}-%{release}
+Requires: vpp-license = %{version}-%{release}
 
 %description lib
 lib components for the vpp package.
+
+
+%package license
+Summary: license components for the vpp package.
+Group: Default
+
+%description license
+license components for the vpp package.
 
 
 %package python
@@ -133,7 +144,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656271428
+export SOURCE_DATE_EPOCH=1656343980
 pushd src
 mkdir -p clr-build
 pushd clr-build
@@ -151,8 +162,13 @@ popd
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1656271428
+export SOURCE_DATE_EPOCH=1656343980
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/vpp
+cp %{_builddir}/vpp-22.02/LICENSE %{buildroot}/usr/share/package-licenses/vpp/1128f8f91104ba9ef98d37eea6523a888dcfa5de
+cp %{_builddir}/vpp-22.02/extras/vpp_config/LICENSE.txt %{buildroot}/usr/share/package-licenses/vpp/669a1e53b9dd9df3474300d3d959bb85bad75945
+cp %{_builddir}/vpp-22.02/src/pkg/debian/copyright %{buildroot}/usr/share/package-licenses/vpp/ce6f4e9522a351c40cd0400eb7823207731f4421
+cp %{_builddir}/vpp-22.02/src/vpp-api/python/LICENSE.txt %{buildroot}/usr/share/package-licenses/vpp/669a1e53b9dd9df3474300d3d959bb85bad75945
 pushd src
 pushd clr-build
 %make_install
@@ -1887,6 +1903,12 @@ mv %{buildroot}/usr/etc/sysctl.d/80-vpp.conf %{buildroot}/usr/share/doc/vpp/sysc
 /usr/lib64/vpp_plugins/vmxnet3_plugin.so
 /usr/lib64/vpp_plugins/vrrp_plugin.so
 /usr/lib64/vpp_plugins/wireguard_plugin.so
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/vpp/1128f8f91104ba9ef98d37eea6523a888dcfa5de
+/usr/share/package-licenses/vpp/669a1e53b9dd9df3474300d3d959bb85bad75945
+/usr/share/package-licenses/vpp/ce6f4e9522a351c40cd0400eb7823207731f4421
 
 %files python
 %defattr(-,root,root,-)
